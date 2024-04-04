@@ -1,16 +1,21 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {StyleSheet, useColorScheme, Pressable, Dimensions, Text} from 'react-native';
+import {
+  StyleSheet,
+  useColorScheme,
+  Pressable,
+  Dimensions,
+  Text,
+} from 'react-native';
 import CardLayout from './CardLayout';
 
 const SampleCardDetails = [
-    {
-      title: 'Card 1',
-    },
-    {
-      title: 'Card 2',
-    },
-    { title: 'Card 3' },
-  ];
+  {title: 'Card 1'},
+  {title: 'Card 2'},
+  {title: 'Card 3'},
+  {title: 'Card 4'},
+  {title: 'Card 5'},
+  {title: 'Card 6'},
+];
 
 export const cardClosedContext = createContext(false);
 
@@ -23,19 +28,25 @@ function CardContainer({navigation}: CardContainerProps): React.JSX.Element {
   const cardClosed = useContext(cardClosedContext);
   const rotateDegreeDefault =
     10 - (SampleCardDetails.length - 2 * Math.log2(2.5)) * 2;
-    const translateYDefault = 80;
+  const translateYDefault = 80;
 
   const handlePress = () => {
     if (cardClosed) {
       navigation.navigate('DisplayCardsList');
     } else {
-      navigation.navigate('Home');
+      // navigation.navigate('Home');
+    }
+  };
+
+  const handleCardPress = (card: any) => {
+    if (!cardClosed) {
+      navigation.navigate('CardDetails', {card});
     }
   };
 
   return (
     <>
-      <Text style={{fontSize: 20}}>{cardClosed ? 'closed' : 'open'}</Text>
+      {/* <Text style={{fontSize: 20}}>{cardClosed ? 'closed' : 'open'}</Text> */}
       <Pressable onPress={handlePress} style={styles.cardContainer}>
         {SampleCardDetails.slice(0)
           .reverse()
@@ -43,12 +54,15 @@ function CardContainer({navigation}: CardContainerProps): React.JSX.Element {
             <CardLayout
               key={index}
               title={card.title}
-              rotateDegree={cardClosed ?
-                (SampleCardDetails.length - (index + 1)) * rotateDegreeDefault :
-                0
+              rotateDegree={
+                cardClosed
+                  ? (SampleCardDetails.length - (index + 1)) *
+                    rotateDegreeDefault
+                  : 0
               }
-                translateY={cardClosed ? 0 : translateYDefault * index}
-                scale={cardClosed ? 1 : 1.1}
+              translateY={cardClosed ? 0 : translateYDefault * index}
+              scale={cardClosed ? 1 : 1.1}
+              handleCardPress={() => handleCardPress(card)}
             />
           ))}
       </Pressable>
@@ -58,7 +72,7 @@ function CardContainer({navigation}: CardContainerProps): React.JSX.Element {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    marginTop: 0,
+    marginTop: 10,
     width: '100%',
     height: 300,
     justifyContent: 'center',

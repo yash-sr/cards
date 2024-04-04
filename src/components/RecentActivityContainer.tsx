@@ -11,8 +11,6 @@ import {
   useColorScheme,
 } from 'react-native';
 
-import Scan from '../../assets/icons/Scan.svg';
-
 type ActivityProps = PropsWithChildren<{
   imageUri: string;
   vendorName: string;
@@ -44,14 +42,14 @@ const Activity = ({
         <Text
           style={{
             fontSize: 20,
-            fontWeight: 600,
+            fontWeight: '600',
           }}>
           {vendorName}
         </Text>
         <Text
           style={{
             fontSize: 15,
-            fontWeight: 400,
+            fontWeight: '400',
           }}>
           {date.toLocaleDateString()}
         </Text>
@@ -60,7 +58,7 @@ const Activity = ({
         <Text
           style={{
             fontSize: 20,
-            fontWeight: 500,
+            fontWeight: '500',
           }}>
           -$ {amount}
         </Text>
@@ -69,10 +67,7 @@ const Activity = ({
   );
 };
 
-const RecentActivityContainer = ({
-  pay,
-  transfer,
-}: PaymentControlProps): React.JSX.Element => {
+const RecentActivityContainer = (): React.JSX.Element => {
   const date: Date = new Date();
   return (
     <View style={styles.recentActivityContainer}>
@@ -94,6 +89,22 @@ const RecentActivityContainer = ({
         vendorName={'Amazon'}
         date={date}
         amount={45.99}
+      />
+      <Activity
+        imageUri={
+          'https://i.pinimg.com/564x/1b/54/ef/1b54efef3720f6ac39647fc420d4a6f9.jpg'
+        }
+        vendorName={'Netflix'}
+        date={date}
+        amount={12.99}
+      />
+      <Activity
+        imageUri={
+          'https://i.pinimg.com/564x/1b/54/ef/1b54efef3720f6ac39647fc420d4a6f9.jpg'
+        }
+        vendorName={'Netflix'}
+        date={date}
+        amount={12.99}
       />
       <Activity
         imageUri={

@@ -11,12 +11,12 @@ import {
   View,
 } from 'react-native';
 
-import PaymentControls from '../components/PaymentControls';
-import RecentActivityContainer from '../components/RecentActivityContainer';
+import CardContainer from '../../components/CardContainer';
+import PaymentControls from '../../components/PaymentControls';
+import RecentActivityContainer from '../../components/RecentActivityContainer';
 
 import Bell from '../../assets/icons/bell.svg';
 import Hello from '../../assets/icons/helloEmoji.svg';
-import CardContainer from '../components/CardContainer';
 
 const Colors = {
   light: '#E5E5D5',
@@ -24,16 +24,6 @@ const Colors = {
   fontLight: '#FFFFFF',
   fontDark: '#000000',
 };
-
-const SampleCardDetails = [
-  {
-    title: 'Card 1',
-  },
-  {
-    title: 'Card 2',
-  },
-];
-const rotateDegree = 10 - (SampleCardDetails.length - 2 * Math.log2(2.5)) * 2;
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -94,7 +84,7 @@ function Home({navigation}: HomeProps): React.JSX.Element {
                 style={{
                   color: styleVars.fontHighlightColor,
                   fontSize: 24,
-                  fontWeight: 300,
+                  fontWeight: '300',
                 }}>
                 Welcome Back,
               </Text>
@@ -102,7 +92,7 @@ function Home({navigation}: HomeProps): React.JSX.Element {
                 style={{
                   color: styleVars.fontHighlightColor,
                   fontSize: 24,
-                  fontWeight: 400,
+                  fontWeight: '400',
                 }}>
                 User Name <Hello width={30} height={26} fill={'#FAC036'} />
               </Text>
@@ -125,7 +115,7 @@ function Home({navigation}: HomeProps): React.JSX.Element {
           </View>
         </View>
         <CardContainer navigation={navigation}/>
-        <PaymentControls pay="Pay" transfer="Transfer" />
+        <PaymentControls pay="Pay" transfer="Transfer" checkCreditScore={true} />
         <RecentActivityContainer />
         <View
           style={[

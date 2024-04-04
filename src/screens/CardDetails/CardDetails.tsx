@@ -7,8 +7,11 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
 import CardContainer from '../../components/CardContainer';
+import CardLayout from '../../components/CardLayout';
+import RecentActivityContainer from '../../components/RecentActivityContainer';
 
 const Colors = {
   light: '#E5E5D5',
@@ -17,13 +20,11 @@ const Colors = {
   fontDark: '#000000',
 };
 
-type DisplayCardsListProps = PropsWithChildren<{
+type CardDetailsProps = PropsWithChildren<{
   navigation: any;
 }>;
 
-function DisplayCardsList({
-  navigation,
-}: DisplayCardsListProps): React.JSX.Element {
+function CardDetails({navigation}: CardDetailsProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const styleVars = {
     backgroundColor: isDarkMode ? Colors.dark : Colors.light,
@@ -41,8 +42,12 @@ function DisplayCardsList({
         contentInsetAdjustmentBehavior="automatic"
         style={{backgroundColor: styleVars.backgroundColor}}
         contentContainerStyle={{flexGrow: 1}}>
-        <View style={[styles.displayCardsContainer]}>
-          <CardContainer navigation={navigation} />
+        <View style={[styles.manageCards]}>
+          <View style={styles.cardContainer}>
+            <CardLayout title="Card 1" scale={1.11} />
+          </View>
+          <Text style={{color: 'red', fontSize: 16}}>boss</Text>
+          <RecentActivityContainer />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -50,10 +55,21 @@ function DisplayCardsList({
 }
 
 const styles = StyleSheet.create({
-  displayCardsContainer: {
+  manageCards: {
     backgroundColor: '#E5E5D5',
-    height: 1000,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    position: 'relative',
+    minHeight: Dimensions.get('window').height,
+  },
+  cardContainer: {
+    marginTop: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    width: '100%',
+    height: 300,
   },
 });
 
-export default DisplayCardsList;
+export default CardDetails;
